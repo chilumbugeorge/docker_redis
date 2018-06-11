@@ -1,0 +1,7 @@
+redis-puppet-1=512mb
+redis-puppet-2=512mb
+redis-puppet-3=512mb
+redis-puppet-4=512mb
+redis-test-1=512mb
+redis-test-2=512mb
+redis-test-3=512mb

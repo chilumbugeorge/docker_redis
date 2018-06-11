@@ -1,0 +1,7 @@
+# Perform the following steps in order
+1. # Check if the redis docker image exists. If it does, then skip to step 3, otherwise go to step 2 and create one.
+sudo docker images
+
+2.  # Build a docker image if it does not already exist
+cd /opt/Docker
+sudo docker build --no-cache=true --tag redis:3.2.8 .

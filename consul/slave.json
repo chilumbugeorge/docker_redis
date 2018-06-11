@@ -1,0 +1,14 @@
+{
+    "name": "redis-name",
+    "tags": [
+        "slave"
+    ],
+    "port": 6379,
+    "checks": [
+        {
+            "script": "/etc/consul.d/scripts/redis.sh",
+            "interval": "5s"
+        }
+    ],
+    "enableTagOverride": true
+}
