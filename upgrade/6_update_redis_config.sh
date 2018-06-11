@@ -3,6 +3,13 @@ declare -A containers
 
 while IFS== read -r key value; do
     containers[$key]=${value}
+     D=$(sudo docker exec -t $key mkdir -p /opt/redis/redis_dump);
+     C=$(sudo docker exec -t $key chown redis:redis -R /opt/redis/redis_dump/);
+     echo $key ":redis datadir created."
+done < "/opt/Docker/upgrade/files/containers.txt"
+
+while IFS== read -r key value; do
+    containers[$key]=${value}
      S=$(sudo docker exec -t $key sed -i -e 's/1gb/'${value//[[:blank:]]/}'/g' /etc/redis/redis.conf);
      echo $key ":maxmemory has been updated"
 done < "/opt/Docker/upgrade/files/maxmemory.txt"
