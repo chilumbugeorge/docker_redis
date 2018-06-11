@@ -1,1 +1,2 @@
-redis-puppet-4=10.1.0.132
+redis-session-1=10.1.9.100
+redis-general-1=10.1.9.101
