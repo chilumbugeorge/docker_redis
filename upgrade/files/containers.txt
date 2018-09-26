@@ -1,2 +1,0 @@
-redis-session-1=10.1.9.100
-redis-general-1=10.1.9.101

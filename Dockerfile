@@ -1,5 +1,5 @@
 #Download base image ubuntu 16.04
-FROM ubuntu:14.04
+FROM ubuntu:14.04 
 MAINTAINER George Chilumbu
 
 ENV HOME /root
@@ -12,9 +12,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Set the working directory to /app
 WORKDIR ~/
 
-# Install some necessary software/tools
+# Install some necessary software/tools  
 RUN apt-get update && apt-get install -y \
     wget \
+    less \
     vim \
     unzip \
     inetutils-ping \
@@ -27,13 +28,15 @@ RUN apt-get update && apt-get install -y \
     rsyslog \
     curl
 
+RUN apt-get upgrade -y
+
 RUN add-apt-repository ppa:chris-lea/redis-server \
     && apt-get update \
     && apt-get install -y redis-server \
     redis-sentinel \
     && rm /etc/redis/redis.conf \
     && rm /etc/redis/sentinel.conf
-
+   
 COPY redis/redis.conf /etc/redis/redis.conf
 COPY redis/sentinel.conf /etc/redis/sentinel.conf
 
@@ -43,15 +46,11 @@ RUN mkdir -p /opt/redis/redis_dump
 RUN chown redis:redis -R /opt/redis/redis_dump
 
 ## INSTALL and setup redis_exporter
-RUN wget https://github.com/oliver006/redis_exporter/releases/download/v0.17.2/redis_exporter-v0.17.2.linux-amd64.tar.gz
-RUN tar zxf redis_exporter-v0.17.2.linux-amd64.tar.gz -C /opt/
-
-## INSTALL and setup node_exporter. Down from https://github.com/prometheus/node_exporter/releases
-RUN wget https://github.com/prometheus/node_exporter/releases/download/v0.15.2/node_exporter-0.15.2.linux-amd64.tar.gz
-RUN tar zxf node_exporter-0.15.2.linux-amd64.tar.gz -C /opt/
+RUN wget https://github.com/oliver006/redis_exporter/releases/download/v0.21.1/redis_exporter-v0.21.1.linux-amd64.tar.gz
+RUN tar zxf redis_exporter-v0.21.1.linux-amd64.tar.gz -C /opt/
 
 ## INSTALL and setup onsul
-RUN wget https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip
+RUN wget https://releases.hashicorp.com/consul/1.2.2/consul_1.2.2_linux_amd64.zip
 RUN unzip consul_*
 RUN rm consul_*
 RUN mv consul /usr/local/bin

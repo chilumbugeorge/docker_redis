@@ -1,2 +1,0 @@
-redis-session-1=10gb
-redis-general-1=40gb

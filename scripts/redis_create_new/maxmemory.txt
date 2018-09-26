@@ -1,0 +1,1 @@
+redis-portal-1=2gb
