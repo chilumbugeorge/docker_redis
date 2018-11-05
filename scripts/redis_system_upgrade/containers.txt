@@ -1,3 +1,2 @@
-redis-session-1=192.168.2.100
-redis-notifications-1=192.168.2.120
-redis-general-1=192.168.2.133
+redis-test-1=192.168.1.102
+redis-session-1=192.168.1.102
